@@ -1,6 +1,6 @@
 <div class="login-container">
   <div class="login-box">
-    <h1>Reservos Padel</h1>
+    <h1>Turnos de Padel</h1>
     <h2>Iniciar Sesión</h2>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -23,8 +23,12 @@
         </div>
       </div>
 
-      <button type="submit">Ingresar</button>
+      <div class="botones">
+  <button type="submit">Ingresar</button>
+  <button type="button" id="crearcuenta" (click)="mostrarRegistro.emit()">Crear cuenta</button>
+</div>
     </form>
+
 
     <div *ngIf="invalidCredentials" class="error">
       Credenciales inválidas

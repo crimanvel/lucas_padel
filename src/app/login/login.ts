@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,8 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
+
+  @Output() mostrarRegistro = new EventEmitter<void>();
 
   onSubmit() {
     if (this.loginForm.valid) {
