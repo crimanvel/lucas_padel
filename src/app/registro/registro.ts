@@ -9,6 +9,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './registro.html',
   styleUrls: ['./registro.css']
 })
+
+
+
 export class RegistroComponent {
   registerForm: FormGroup;
   userCreated = false;

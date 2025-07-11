@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login';
 import { RegistroComponent } from './registro/registro';
+import { FooterComponent } from './footer/footer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, LoginComponent, RegistroComponent],
+  imports: [CommonModule, LoginComponent, RegistroComponent, FooterComponent],
   template: `
     <app-login
       *ngIf="!mostrarRegistro"
@@ -17,6 +18,8 @@ import { RegistroComponent } from './registro/registro';
       *ngIf="mostrarRegistro"
       (volverAlLogin)="toggleRegistro(false)">
     </app-registro>
+
+    <app-footer />
   `
 })
 export class App {
