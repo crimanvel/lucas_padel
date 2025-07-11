@@ -2,30 +2,37 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login';
 import { RegistroComponent } from './registro/registro';
+import { RecuperarcontraComponent } from './recuperarcontra/recuperarcontra';
 import { FooterComponent } from './footer/footer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, LoginComponent, RegistroComponent, FooterComponent],
+  imports: [
+    CommonModule,
+    LoginComponent,
+    RegistroComponent,
+    RecuperarcontraComponent,
+    FooterComponent
+  ],
   template: `
-    <app-login
-      *ngIf="!mostrarRegistro"
-      (mostrarRegistro)="toggleRegistro(true)">
-    </app-login>
+    
+  <app-login *ngIf="vista === 'login'"
+             (mostrarRegistro)="vista = 'registro'"
+             (mostrarRecuperar)="vista = 'recuperar'">
+  </app-login>
 
-    <app-registro
-      *ngIf="mostrarRegistro"
-      (volverAlLogin)="toggleRegistro(false)">
-    </app-registro>
+  <app-registro *ngIf="vista === 'registro'"
+                (volverAlLogin)="vista = 'login'">
+  </app-registro>
 
-    <app-footer />
-  `
+  <app-recuperarcontra *ngIf="vista === 'recuperar'"
+                       (volverAlLogin)="vista = 'login'">
+  </app-recuperarcontra>
+
+  <app-footer />
+`
 })
 export class App {
-  mostrarRegistro = false;
-
-  toggleRegistro(valor: boolean) {
-    this.mostrarRegistro = valor;
-  }
+  vista: 'login' | 'registro' | 'recuperar' = 'login';
 }

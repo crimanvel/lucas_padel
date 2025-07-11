@@ -23,6 +23,8 @@ export class LoginComponent {
   }
 
   @Output() mostrarRegistro = new EventEmitter<void>();
+  @Output() mostrarRecuperar = new EventEmitter<void>();
+
 
   onSubmit() {
     if (this.loginForm.valid) {

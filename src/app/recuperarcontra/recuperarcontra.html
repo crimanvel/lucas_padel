@@ -1,0 +1,27 @@
+<div class="recuperar-container">
+  <div class="recuperar-box">
+    <h1>Turnos de Padel</h1>
+    <h2>Recuperar Contraseña</h2>
+
+    <form [formGroup]="form" (ngSubmit)="recuperar()">
+      <label for="email">Correo electrónico</label>
+      <input id="email" formControlName="email" type="email" />
+
+      <div *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['required']" class="error">
+        El correo es obligatorio
+      </div>
+      <div *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['email']" class="error">
+        El correo no es válido
+      </div>
+
+      <div class="botones">
+        <button type="submit">Enviar recuperación</button>
+        <button type="button" id="volverlogin" (click)="volver()">Volver al login</button>
+      </div>
+    </form>
+
+    <div *ngIf="enviado" class="success">
+      ✅ Email enviado. Revisá tu bandeja de entrada.
+    </div>
+  </div>
+</div>
