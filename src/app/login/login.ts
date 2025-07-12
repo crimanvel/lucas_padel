@@ -1,42 +1,51 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Output, EventEmitter } from '@angular/core';
-
-
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.css']
+  styleUrls: ['./login.css'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
   invalidCredentials = false;
-
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(4)]]
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
-
-  @Output() mostrarRegistro = new EventEmitter<void>();
-  @Output() mostrarRecuperar = new EventEmitter<void>();
-
-
-  onSubmit() {
+  onSubmit(): void {
+    console.log('onSubmit called', this.loginForm.value);
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       if (username === 'admin' && password === '1234') {
         this.invalidCredentials = false;
+        localStorage.setItem('isLoggedIn', 'true');
         alert('¡Bienvenido!');
+        this.router.navigate(['/home']);
       } else {
         this.invalidCredentials = true;
+        localStorage.removeItem('isLoggedIn');
       }
     } else {
-      this.loginForm.markAllAsTouched(); 
+      this.loginForm.markAllAsTouched();
     }
+  }
+  irARegistro(): void {
+    console.log('irARegistro called');
+    this.router.navigate(['/registro']);
+  }
+  irARecuperar(): void {
+    console.log('irARecuperar called');
+    this.router.navigate(['/recuperar']);
   }
 }

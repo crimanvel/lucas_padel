@@ -1,27 +1,28 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './registro.html',
-  styleUrls: ['./registro.css']
+  styleUrls: ['./registro.css'],
 })
-
-
-
 export class RegistroComponent {
   registerForm: FormGroup;
   userCreated = false;
 
-  @Output() volverAlLogin = new EventEmitter<void>();
-
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]]
+      password: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
 
@@ -37,6 +38,7 @@ export class RegistroComponent {
   }
 
   volver() {
-    this.volverAlLogin.emit();
+    console.log('volver al login desde registro');
+    this.router.navigate(['/login']);
   }
 }

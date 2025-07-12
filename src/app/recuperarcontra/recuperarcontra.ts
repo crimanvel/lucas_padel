@@ -1,23 +1,27 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recuperarcontra',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './recuperarcontra.html',
-  styleUrls: ['./recuperarcontra.css']
+  styleUrls: ['./recuperarcontra.css'],
 })
 export class RecuperarcontraComponent {
   form: FormGroup;
   enviado = false;
 
-  @Output() volverAlLogin = new EventEmitter<void>();
-
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
     });
   }
 
@@ -33,6 +37,7 @@ export class RecuperarcontraComponent {
   }
 
   volver() {
-    this.volverAlLogin.emit();
+    console.log('volver al login desde recuperar');
+    this.router.navigate(['/login']);
   }
 }

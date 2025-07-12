@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login';
-import { RegistroComponent } from './registro/registro';
-import { RecuperarcontraComponent } from './recuperarcontra/recuperarcontra';
+import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer';
 
 @Component({
@@ -10,29 +8,12 @@ import { FooterComponent } from './footer/footer';
   standalone: true,
   imports: [
     CommonModule,
-    LoginComponent,
-    RegistroComponent,
-    RecuperarcontraComponent,
+    RouterModule,
     FooterComponent
   ],
   template: `
-    
-  <app-login *ngIf="vista === 'login'"
-             (mostrarRegistro)="vista = 'registro'"
-             (mostrarRecuperar)="vista = 'recuperar'">
-  </app-login>
-
-  <app-registro *ngIf="vista === 'registro'"
-                (volverAlLogin)="vista = 'login'">
-  </app-registro>
-
-  <app-recuperarcontra *ngIf="vista === 'recuperar'"
-                       (volverAlLogin)="vista = 'login'">
-  </app-recuperarcontra>
-
-  <app-footer />
-`
+    <router-outlet></router-outlet>
+    <app-footer />
+  `
 })
-export class App {
-  vista: 'login' | 'registro' | 'recuperar' = 'login';
-}
+export class App {} // 👈 Asegurate que en main.ts lo importes como App
