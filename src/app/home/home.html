@@ -1,1 +1,27 @@
-<p>home works!</p>
+<main class="contenedor-turnos">
+  <header>
+    <h1>Reservos Padel</h1>
+    <button (click)="cerrarSesion()" class="cerrar-sesion-btn">Cerrar sesión</button>
+  </header>
+
+  <section>
+    <h2>Turnos Disponibles</h2>
+
+    <article *ngFor="let club of clubes" class="card-turno">
+      <div class="icono">
+        <img src="assets/padel-icon.svg" alt="Icono de padel" />
+      </div>
+
+      <div class="info">
+        <h3>{{ club.nombre }}</h3>
+        <p>{{ club.direccion }}</p>
+
+        <div class="horarios">
+          <button *ngFor="let hora of club.horarios" (click)="reservar(club.nombre, hora)">
+            {{ hora }}
+          </button>
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
