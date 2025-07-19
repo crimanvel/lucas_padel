@@ -3,7 +3,7 @@
     <h1>Turnos de Padel</h1>
     <h2>Crear Cuenta</h2>
 
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"> <!--Este es una configuracion del formulario con una propiedad y un evento de angular-->
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div>
         <label for="email">Correo electrónico</label>
         <input id="email" formControlName="email" type="email" />
@@ -12,13 +12,13 @@
           class="error" 
         >
           El correo es obligatorio
-        </div><!--Esto es un if en angular que sirve para  validar el input del correo-->
+        </div>
         <div
           *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']"
           class="error"
         >
           El correo no es válido
-        </div> <!--Este-->
+        </div> 
       </div>
 
       <div>
@@ -29,24 +29,24 @@
           class="error"
         >
           La contraseña es obligatoria
-        </div><!--Este-->
+        </div>
         <div
           *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['minlength']"
           class="error"
         >
           Mínimo 4 caracteres
-        </div><!--Este-->
+        </div>
       </div>
 
       <div class="botones">
         <button type="submit">Registrarse</button>
-        <button type="button" id="volverlogin" (click)="volver()"> <!--Este-->
+        <button type="button" id="volverlogin" (click)="volver()"> 
           Volver al login
         </button>
       </div>
     </form>
 
-    <div *ngIf="userCreated" class="success">✅ Usuario creado con éxito</div><!--Este-->
+    <div *ngIf="userCreated" class="success">✅ Usuario creado con éxito</div>
   </div>
 
 </div>

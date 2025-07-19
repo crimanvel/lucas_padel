@@ -57,7 +57,7 @@ input.ng-invalid.ng-touched {
 .botones {
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* Espacio entre los botones */
+  gap: 1rem;
   margin-top: 1.5rem;
 }
 
