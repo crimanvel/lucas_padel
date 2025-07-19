@@ -5,11 +5,9 @@ import { CommonModule } from '@angular/common';
   selector: 'app-footer',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <footer class="footer">
-      © 2025 Reservos Padel - Todos los derechos reservados
-    </footer>
-  `,
+ templateUrl: './footer.html',
   styleUrls: ['./footer.css']
 })
-export class FooterComponent {}
+export class FooterComponent {
+  
+}

@@ -20,7 +20,7 @@ export class TurnosService {
     },
     {
       nombre: 'Pádel Center',
-      direccion: 'Calle Falsa 123',
+      direccion: 'Avenida Belgrano 123',
       horarios: ['9:00', '10:00', '11:00']
     },
     {
@@ -54,7 +54,7 @@ export class TurnosService {
     if (club) {
       const index = club.horarios.indexOf(hora);
       if (index !== -1) {
-        club.horarios.splice(index, 1); // Elimina el horario reservado
+        club.horarios.splice(index, 1); 
         this.guardarClubes();
         return true;
       }

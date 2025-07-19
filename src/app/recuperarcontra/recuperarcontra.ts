@@ -40,4 +40,6 @@ export class RecuperarcontraComponent {
     console.log('volver al login desde recuperar');
     this.router.navigate(['/login']);
   }
+
+  
 }

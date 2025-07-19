@@ -12,8 +12,9 @@ import { FooterComponent } from './footer/footer';
     FooterComponent
   ],
   template: `
+  
     <router-outlet></router-outlet>
     <app-footer />
   `
 })
-export class App {} // 👈 Asegurate que en main.ts lo importes como App
+export class App {} 

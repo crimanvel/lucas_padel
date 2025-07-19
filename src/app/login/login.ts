@@ -7,6 +7,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -14,9 +16,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
 })
+
 export class LoginComponent {
   loginForm: FormGroup;
   invalidCredentials = false;
+  
   constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -27,7 +31,7 @@ export class LoginComponent {
     console.log('onSubmit called', this.loginForm.value);
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      if (username === 'admin' && password === '1234') {
+      if (username === 'jugador' && password === '1234') {
         this.invalidCredentials = false;
         localStorage.setItem('isLoggedIn', 'true');
         alert('¡Bienvenido!');

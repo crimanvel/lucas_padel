@@ -7,8 +7,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (typeof window === 'undefined') {
-      // SSR: no permitir acceso
-      return false;
+           return false;
     }
     const isLoggedIn = !!localStorage.getItem('isLoggedIn');
     if (!isLoggedIn) {
