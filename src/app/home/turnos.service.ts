@@ -27,7 +27,23 @@ export class TurnosService {
       nombre: 'Canchas Los Álamos',
       direccion: 'Av. Los Rosales 543',
       horarios: ['14:00', '15:00', '16:00']
+    },
+    {
+      nombre: 'Instituto',
+      direccion: 'Av. Velez 742',
+      horarios: ['10:00', '11:00', '12:00']
+    },
+    {
+      nombre: 'Pádel House',
+      direccion: 'Avenida Rosas 123',
+      horarios: ['9:00', '10:00', '11:00']
+    },
+    {
+      nombre: 'Canchas Talleres',
+      direccion: 'Av. San Martin 543',
+      horarios: ['14:00', '15:00', '16:00']
     }
+
   ];
 
   constructor() {
