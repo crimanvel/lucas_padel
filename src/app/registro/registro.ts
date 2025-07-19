@@ -20,10 +20,20 @@ export class RegistroComponent {
   userCreated = false;
 
   constructor(private fb: FormBuilder, private router: Router) {
-    this.registerForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
-    });
+    this.registerForm = this.fb.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(4)]],
+        repeatPassword: ['', [Validators.required]],
+      },
+      { validators: this.matchPasswordsValidator }
+    );
+  }
+
+  matchPasswordsValidator(form: FormGroup) {
+    const pass = form.get('password')?.value;
+    const repeat = form.get('repeatPassword')?.value;
+    return pass === repeat ? null : { passwordsMismatch: true };
   }
 
   onSubmit() {
