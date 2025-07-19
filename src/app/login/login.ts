@@ -36,6 +36,11 @@ export class LoginComponent {
         localStorage.setItem('isLoggedIn', 'true');
         alert('¡Bienvenido!');
         this.router.navigate(['/home']);
+      } else if (username === 'admin' && password === '1234') {
+        this.invalidCredentials = false;
+        localStorage.setItem('isLoggedIn', 'true');
+        alert('¡Bienvenido Administrador!');
+        this.router.navigate(['/admin']);
       } else {
         this.invalidCredentials = true;
         localStorage.removeItem('isLoggedIn');
