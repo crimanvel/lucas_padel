@@ -15,20 +15,15 @@ import { Router } from '@angular/router';
 export class Admin {
   seccion: 'usuarios' | 'clubes' | 'turnos' = 'usuarios';
 
-  // Usuarios
   usuarios: any[] = [
     { nombre: 'Juan Pérez', email: 'juan@example.com', rol: 'Usuario' },
     { nombre: 'Ana Gómez', email: 'ana@example.com', rol: 'Administrador' },
   ];
   usuarioForm: FormGroup;
   usuarioEditandoIndex: number | null = null;
-
-  // Clubes
   clubForm: FormGroup;
   clubEditando: Club | null = null;
   clubes: Club[] = [];
-
-  // Turnos
   turnoForm: FormGroup;
   turnoEditando: { club: Club; hora: string } | null = null;
 
@@ -37,20 +32,18 @@ export class Admin {
     private turnosService: TurnosService,
     private router: Router
   ) {
-    // Usuarios
+
     this.usuarioForm = this.fb.group({
       nombre: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       rol: ['', Validators.required],
     });
 
-    // Clubes
     this.clubForm = this.fb.group({
       nombre: ['', Validators.required],
       direccion: ['', Validators.required],
     });
 
-    // Turnos
     this.turnoForm = this.fb.group({
       club: ['', Validators.required],
       hora: ['', Validators.required],
@@ -60,7 +53,7 @@ export class Admin {
     this.actualizarClubes();
   }
 
-  // Usuarios
+ 
   guardar() {
     if (this.usuarioForm.valid) {
       const nuevoUsuario = this.usuarioForm.value;
@@ -87,7 +80,6 @@ export class Admin {
     this.usuarios = this.usuarios.filter((u) => u !== usuario);
   }
 
-  // Clubes
   actualizarClubes() {
     this.clubes = this.turnosService.getClubes();
   }
@@ -127,8 +119,6 @@ export class Admin {
     this.turnosService.eliminarClub(club.nombre);
     this.actualizarClubes();
   }
-
-  // Turnos
   agregarTurno() {
     if (this.turnoForm.valid) {
       this.turnosService.agregarTurno(

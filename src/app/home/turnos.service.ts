@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 
 export interface Club {
   nombre: string;
-  direccion: string; // <-- agregar esto
+  direccion: string; 
   horarios: string[];
-  reservas: { [hora: string]: boolean }; // <-- asegúrate de que esto esté presente
+  reservas: { [hora: string]: boolean }; 
 }
 
 const STORAGE_KEY = 'clubes_padel';
@@ -16,7 +16,7 @@ export class TurnosService {
   private clubes: Club[] = [
     {
       nombre: 'Club Padel Norte',
-      direccion: 'Av. Norte 123', // <-- agregar esto
+      direccion: 'Av. Norte 123',
       horarios: ['10:00', '11:00', '12:00'],
       reservas: {
         '10:00': false,
