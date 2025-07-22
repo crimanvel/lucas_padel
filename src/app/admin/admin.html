@@ -1,54 +1,144 @@
-<main class="admin-container">
-  <header>
-    <h1>Panel de Administración</h1>
-  </header>
+<div class="admin-layout">
+  <nav class="sidebar">
+    <ul>
+      <li
+        [class.active]="seccion === 'usuarios'"
+        (click)="seccion = 'usuarios'"
+      >
+        Usuarios
+      </li>
+      <li [class.active]="seccion === 'clubes'" (click)="seccion = 'clubes'">
+        Clubes
+      </li>
+      <li [class.active]="seccion === 'turnos'" (click)="seccion = 'turnos'">
+        Turnos
+      </li>
+    </ul>
+  </nav>
+  <main class="main-panel">
+    <div class="admin-header">
+      <h1>Panel de Administración</h1>
+      <button (click)="cerrarSesion()" class="cerrar-sesion-btn">
+        Cerrar sesión
+      </button>
+    </div>
+    <section *ngIf="seccion === 'usuarios'">
+      <div class="admin-content">
+        <h2>Gestión de Usuarios</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Correo electrónico</th>
+              <th>Rol</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios; let i = index">
+              <td>{{ usuario.nombre }}</td>
+              <td>{{ usuario.email }}</td>
+              <td>{{ usuario.rol }}</td>
+              <td>
+                <button (click)="editar(usuario, i)">Editar</button>
+                <button (click)="eliminar(usuario)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-  <section class="admin-content">
-    <nav class="sidebar">
-      <ul>
-        <li class="active">Usuarios</li>
-        <li>Clubes</li>
-        <li>Turnos</li>
-      </ul>
-    </nav>
+        <h3>Añadir Usuario</h3>
+        <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" formControlName="nombre" />
 
-    <section class="main-panel">
-      <h2>Usuarios</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Correo electrónico</th>
-            <th>Rol</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let usuario of usuarios; let i = index">
-            <td>{{ usuario.nombre }}</td>
-            <td>{{ usuario.email }}</td>
-            <td>{{ usuario.rol }}</td>
-            <td>
-              <button (click)="editar(usuario, i)">Editar</button>
-              <button (click)="eliminar(usuario)">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          <label for="email">Correo electrónico</label>
+          <input id="email" formControlName="email" />
 
-      <h3>Añadir Usuario</h3>
-      <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
-        <label for="nombre">Nombre</label>
-        <input id="nombre" formControlName="nombre" />
+          <label for="rol">Rol</label>
+          <input id="rol" formControlName="rol" />
 
-        <label for="email">Correo electrónico</label>
-        <input id="email" formControlName="email" />
-
-        <label for="rol">Rol</label>
-        <input id="rol" formControlName="rol" />
-
-        <button type="submit" [disabled]="usuarioForm.invalid">Guardar</button>
-      </form>
+          <button type="submit" [disabled]="usuarioForm.invalid">
+            Guardar
+          </button>
+        </form>
+      </div>
     </section>
-  </section>
-</main>
+    <section *ngIf="seccion === 'clubes'">
+      <h2>Gestión de Clubes</h2>
+      <form
+        [formGroup]="clubForm"
+        (ngSubmit)="clubEditando ? guardarEdicionClub() : agregarClub()"
+      >
+        <label
+          >Nombre:
+          <input formControlName="nombre" />
+        </label>
+        <label
+          >Dirección:
+          <input formControlName="direccion" />
+        </label>
+        <button type="submit">
+          {{ clubEditando ? "Guardar" : "Agregar" }}
+        </button>
+        <button
+          *ngIf="clubEditando"
+          type="button"
+          (click)="clubEditando = null; clubForm.reset()"
+        >
+          Cancelar
+        </button>
+      </form>
+      <div *ngFor="let club of clubes" class="club-box">
+        <h3>{{ club.nombre }}</h3>
+        <p>{{ club.direccion }}</p>
+        <button (click)="editarClub(club)">Editar</button>
+        <button (click)="eliminarClub(club)">Eliminar</button>
+      </div>
+    </section>
+    <section *ngIf="seccion === 'turnos'">
+      <h2>Gestión de Turnos</h2>
+      <form
+        [formGroup]="turnoForm"
+        (ngSubmit)="turnoEditando ? guardarEdicionTurno() : agregarTurno()"
+      >
+        <label
+          >Club:
+          <select formControlName="club">
+            <option *ngFor="let club of clubes" [value]="club.nombre">
+              {{ club.nombre }}
+            </option>
+          </select>
+        </label>
+        <label *ngIf="!turnoEditando"
+          >Hora nueva:
+          <input formControlName="hora" placeholder="Ej: 17:00" />
+        </label>
+        <label *ngIf="turnoEditando"
+          >Modificar a:
+          <input formControlName="horaNueva" placeholder="Ej: 17:00" />
+        </label>
+        <button type="submit">
+          {{ turnoEditando ? "Guardar" : "Agregar" }}
+        </button>
+        <button
+          *ngIf="turnoEditando"
+          type="button"
+          (click)="turnoEditando = null; turnoForm.reset()"
+        >
+          Cancelar
+        </button>
+      </form>
+      <div *ngFor="let club of clubes" class="club-box">
+        <h3>{{ club.nombre }}</h3>
+        <ul>
+          <li *ngFor="let hora of club.horarios">
+            {{ hora }}
+            <button (click)="editarTurno(club, hora)">Editar</button>
+            <button (click)="eliminarTurno(club, hora)">Eliminar</button>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>

@@ -13,9 +13,16 @@ header h1 {
   display: flex;
 }
 
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
 .sidebar {
-  width: 200px;
-  padding-right: 20px;
+  width: 180px;
+  background: #33695c;
+  color: #fff;
+  padding: 1rem 0;
 }
 
 .sidebar ul {
@@ -24,22 +31,20 @@ header h1 {
 }
 
 .sidebar li {
-  padding: 10px;
-  border-radius: 6px;
+  padding: 1rem;
   cursor: pointer;
 }
 
-.sidebar .active {
-  background-color: #e9ecef;
+.sidebar li.active {
+  background: #e6e9ec;
+  color: #222;
   font-weight: bold;
 }
 
 .main-panel {
-  flex-grow: 1;
+  flex: 1;
+  padding: 2rem;
   background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
 }
 
 table {
@@ -79,4 +84,39 @@ button {
 
 button:hover {
   background-color: #1a252f;
+}
+
+.btn-cerrar-sesion {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.cerrar-sesion-btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cerrar-sesion-btn:hover {
+  background: #c0392b;
 }
